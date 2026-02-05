@@ -1,4 +1,4 @@
-import type { FC, ReactNode, ButtonHTMLAttributes } from 'react';
+import type { FC, ButtonHTMLAttributes } from 'react';
 
 type ButtonVariant =
     | 'addStopwatchBtn'
@@ -8,7 +8,6 @@ type ButtonVariant =
     | 'deleteBtn';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    children: ReactNode;
     variant: ButtonVariant;
 }
 
