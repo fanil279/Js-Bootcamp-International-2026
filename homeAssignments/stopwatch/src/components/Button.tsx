@@ -1,4 +1,4 @@
-import type { FC, ReactNode, ButtonHTMLAttributes, MouseEvent } from 'react';
+import type { FC, ReactNode, ButtonHTMLAttributes } from 'react';
 
 type ButtonVariant =
     | 'addStopwatchBtn'
@@ -10,15 +10,14 @@ type ButtonVariant =
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     children: ReactNode;
     variant: ButtonVariant;
-    onClick: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 const VARIANTS: Record<ButtonVariant, string> = {
-    addStopwatchBtn: '',
-    startBtn: '',
-    pauseBtn: '',
-    clearBtn: '',
-    deleteBtn: '',
+    addStopwatchBtn: 'btn addStopwatchBtn',
+    startBtn: 'btn startBtn',
+    pauseBtn: 'btn pauseBtn',
+    clearBtn: 'btn clearBtn',
+    deleteBtn: 'btn deleteBtn',
 };
 
 const Button: FC<ButtonProps> = (

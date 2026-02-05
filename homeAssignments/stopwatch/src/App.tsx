@@ -1,17 +1,19 @@
+import { Plus, /* Play, Pause, RotateCcw, Trash2 */ } from 'lucide-react';
 import './App.css';
 import Button from './components/Button';
 
 function App() {
 	return (
 		<>
-			<div id='controls'>
-				<Button variant='addStopwatchBtn' onClick={() => {/* TO BE IMPLEMENTED */}}>
+			<header className='header'>
+				<Button variant='addStopwatchBtn' onClick={() => {}}>
+					<Plus size={20} />
 					Add Stopwatch
 				</Button>
-			</div>
+			</header>
 
-			<section id='stopwatch-container'>
-
+			<section className='stopwatch-container'>
+				
 			</section>
 		</>
 	);
