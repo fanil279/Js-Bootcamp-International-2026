@@ -17,6 +17,7 @@ This repository contains **home assignments** covering modern front-end technolo
 ---
 
 ⏱️ Running the Assignments
+
 1️ - Clone the repository
 
 git clone https://github.com/fanil279/Js-Bootcamp-International-2026.git
@@ -39,4 +40,4 @@ npm run dev
 
 6️ - Open in browser
 
-Open the URL shown in terminal.
+Open the URL shown in terminal
