@@ -1,5 +1,6 @@
-import { Plus, /* Play, Pause, RotateCcw, Trash2 */ } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import Button from '../../components/Button';
+import Stopwatch from '../../components/Stopwatch';
 
 const StopwatchPage = () => (
     <>
@@ -10,9 +11,13 @@ const StopwatchPage = () => (
             </Button>
         </header>
 
-        <section className='stopwatch-container'>
-            
-        </section>
+        <main className='stopwatch-container'>
+            <Stopwatch />
+
+            <section className='stopwatch-list'>
+                
+            </section>
+        </main>
     </>
 );
 

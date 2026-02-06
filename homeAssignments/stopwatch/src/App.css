@@ -8,21 +8,26 @@
 .stopwatch-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  margin-top: 5rem;
+  margin-top: 3rem;
 }
 
-.addStopwatchBtn {
-  background-color: #17a897;
-  display: inline-flex;
-  gap: 5px;
-}
+.addStopwatchBtn { background-color: #17a897; }
 .startBtn        { background-color: #3B82F6; }
 .pauseBtn        { background-color: #8B5CF6; }
 .clearBtn        { background-color: #F59E0B; }
+.resumeBtn       { background-color: #22C55E; }
 .deleteBtn       { background-color: #EF4444; }
 
+.startBtn, .pauseBtn, .clearBtn, .resumeBtn {
+  height: 3rem;
+  width: 10rem;
+}
+
 .btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7rem;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -36,4 +41,18 @@
 .btn:hover {
   transform: translateY(-5px);
   opacity: 0.8;
+}
+
+.stopwatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.stopwatch-time {
+  font-size: 9rem;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1;
 }
