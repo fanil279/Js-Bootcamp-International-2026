@@ -1,13 +1,13 @@
 import type { ButtonHTMLAttributes } from 'react';
 
 export type ButtonVariant =
-    | 'addStopwatchBtn'
-    | 'startBtn'
-    | 'pauseBtn'
-    | 'clearBtn'
-    | 'resumeBtn'
-    | 'deleteBtn';
+    | 'primary'
+    | 'secondary'
+    | 'tertiary'
+    | 'success'
+    | 'warning'
+    | 'danger';
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant: ButtonVariant;
-}
+};

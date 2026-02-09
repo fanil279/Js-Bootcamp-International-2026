@@ -11,12 +11,12 @@
   margin-top: 1.5rem;
 }
 
-.addStopwatchBtn { background-color: #17a897; }
-.startBtn        { background-color: #3B82F6; }
-.pauseBtn        { background-color: #8B5CF6; }
-.clearBtn        { background-color: #F59E0B; }
-.resumeBtn       { background-color: #22C55E; }
-.deleteBtn       { background-color: #EF4444; }
+.primary    { background-color: #3B82F6; }
+.secondary  { background-color: #17a897; }
+.tertiary   { background-color: #8B5CF6; }
+.success    { background-color: #22C55E; }
+.warning    { background-color: #F59E0B; }
+.danger     { background-color: #EF4444; }
 
 .btn {
   display: inline-flex;

@@ -2,12 +2,12 @@ import { type FC } from 'react';
 import type { ButtonVariant, ButtonProps } from '../types';
 
 const VARIANTS: Record<ButtonVariant, string> = {
-    addStopwatchBtn: 'btn addStopwatchBtn',
-    startBtn: 'btn startBtn',
-    pauseBtn: 'btn pauseBtn',
-    clearBtn: 'btn clearBtn',
-    resumeBtn: 'btn resumeBtn',
-    deleteBtn: 'btn deleteBtn',
+    primary: 'btn primary',
+    secondary: 'btn secondary',
+    tertiary: 'btn tertiary',
+    success: 'btn success',
+    warning: 'btn warning',
+    danger: 'btn danger',
 };
 
 const Button: FC<ButtonProps> = (
