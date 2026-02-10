@@ -1,25 +1,19 @@
 import { type FC, useState } from 'react';
 import { Plus } from 'lucide-react';
 import Button from '../../components/Button';
-import StopwatchList from '../../components/StopwatchList';
+import StopwatchList from './components/StopwatchList';
+import handleAddStopwatch from '../../utils/stopwatch.utils';
 import type { StopwatchItem } from '../../types';
 
 const StopwatchPage: FC = () => {
     const [stopwatchList, setStopwatchList] = useState<StopwatchItem[]>([]);
-
-    function handleAddStopwatch() {
-        setStopwatchList((prev) => [
-            ...prev,
-            { id: crypto.randomUUID(), status: 'idle' }
-        ]);
-    }
 
     return (
         <>
             <header className='header'>
                 <Button
                     variant='secondary'
-                    onClick={handleAddStopwatch}
+                    onClick={() => handleAddStopwatch(setStopwatchList)}
                 >
                     <Plus size={20} />
                     Add Stopwatch

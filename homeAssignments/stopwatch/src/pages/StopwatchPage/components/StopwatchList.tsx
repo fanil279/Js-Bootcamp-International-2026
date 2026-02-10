@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import Stopwatch from '../components/Stopwatch';
-import type { Status, StopwatchItem, StopwatchListProps } from '../types';
+import type { Status, StopwatchItem, StopwatchListProps } from '../../../types';
 
 const StopwatchList: FC<StopwatchListProps> = (
     { stopwatchList, setStopwatchList }

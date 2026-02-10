@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 import { Trash2 } from 'lucide-react';
-import Button from './Button';
-import StopwatchControls from './StopwatchControls';
-import type { StopwatchProps } from '../types/stopwatch';
+import Button from '../../../components/Button';
+import StopwatchControls from '../components/StopwatchControls';
+import type { StopwatchProps } from '../../../types';
 
 const Stopwatch: FC<StopwatchProps> = ({ status, setStatus, onDelete }) => (
     <div className='stopwatch'>

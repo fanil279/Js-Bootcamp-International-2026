@@ -4,8 +4,8 @@ import {
     Pause,
     RotateCcw
 } from 'lucide-react';
-import Button from './Button';
-import type { StopwatchControlsProps } from '../types';
+import Button from '../../../components/Button';
+import type { StopwatchControlsProps } from '../../../types';
 
 const StopwatchControls: FC<StopwatchControlsProps> = (
     { status, onStart, onPause, onResume, onClear }

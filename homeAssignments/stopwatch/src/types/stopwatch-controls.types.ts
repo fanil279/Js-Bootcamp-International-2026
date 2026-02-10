@@ -1,4 +1,4 @@
-import type { Status } from './stopwatch';
+import type { Status } from './stopwatch.types';
 
 export interface StopwatchControlsProps {
     status: Status;

@@ -1,4 +1,4 @@
-import type { StopwatchItem } from './stopwatch';
+import type { StopwatchItem } from './stopwatch.types';
 
 export interface StopwatchListProps {
     stopwatchList: StopwatchItem[];
