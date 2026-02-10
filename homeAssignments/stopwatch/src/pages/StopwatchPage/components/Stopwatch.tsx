@@ -12,25 +12,23 @@ const Stopwatch: FC<StopwatchProps> = ({
     setStatus,
     onDelete
 }) => {
-    const [, forceRender] = useState(0);
+    const [displayElapsed, setDisplayElapsed] = useState(() => elapsedMs);
 
     useEffect(() => {
-        if (status !== 'running') return;
+        if (status !== 'running' || !startedAt) return;
 
         const interval = setInterval(() => {
-            forceRender(prev => prev + 1);
+            setDisplayElapsed(
+                elapsedMs + (Date.now() - startedAt)
+            );
         }, 50);
 
         return () => clearInterval(interval);
-    }, [status]);
-
-    const liveElapsed = (status === 'running' && startedAt)
-        ? elapsedMs + (Date.now() - startedAt)
-        : elapsedMs;
+    }, [status, startedAt, elapsedMs]);
 
     return (
         <div className='stopwatch'>
-            <span className='stopwatch-time'>{stopwatch(status, liveElapsed)}</span>
+            <span className='stopwatch-time'>{stopwatch(status, displayElapsed)}</span>
 
             <StopwatchControls
                 status={status}
