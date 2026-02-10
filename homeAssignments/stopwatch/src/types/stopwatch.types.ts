@@ -9,4 +9,6 @@ export interface StopwatchProps {
 export interface StopwatchItem {
     id: string;
     status: Status;
+    elapsedMs: number;
+    startedAt: number | null;
 };

@@ -2,7 +2,7 @@ import { type FC, useState } from 'react';
 import { Plus } from 'lucide-react';
 import Button from '../../components/Button';
 import StopwatchList from './components/StopwatchList';
-import handleAddStopwatch from '../../utils/stopwatch.utils';
+import { handleAddStopwatch } from '../../utils/stopwatch.utils';
 import type { StopwatchItem } from '../../types';
 
 const StopwatchPage: FC = () => {
