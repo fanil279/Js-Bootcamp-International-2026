@@ -63,7 +63,7 @@ export function handleDelete(
     );
 }
 
-export function stopwatch(
+export function stopwatchCalc(
     status: Status,
     elapsedMs: number,
 ): string {

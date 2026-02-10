@@ -2,7 +2,7 @@ import { type FC, useEffect, useState } from 'react';
 import { Trash2 } from 'lucide-react';
 import Button from '../../../components/Button';
 import StopwatchControls from '../components/StopwatchControls';
-import { stopwatch } from '../../../utils/stopwatch.utils';
+import { stopwatchCalc } from '../../../utils/stopwatch.utils';
 import type { StopwatchProps } from '../../../types';
 
 const Stopwatch: FC<StopwatchProps> = ({
@@ -28,7 +28,7 @@ const Stopwatch: FC<StopwatchProps> = ({
 
     return (
         <div className='stopwatch'>
-            <span className='stopwatch-time'>{stopwatch(status, displayElapsed)}</span>
+            <span className='stopwatch-time'>{stopwatchCalc(status, displayElapsed)}</span>
 
             <StopwatchControls
                 status={status}
