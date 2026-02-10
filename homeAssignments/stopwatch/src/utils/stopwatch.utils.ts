@@ -2,7 +2,7 @@ import type { Status, StopwatchItem } from '../types';
 
 export function handleAddStopwatch(
     setStopwatchList: React.Dispatch<React.SetStateAction<StopwatchItem[]>>
-) {
+): void {
     setStopwatchList((prev) => [
         ...prev,
 
@@ -15,22 +15,11 @@ export function handleAddStopwatch(
     ]);
 }
 
-export function handleDelete(
-    id: string,
-    setStopwatchList: React.Dispatch<React.SetStateAction<StopwatchItem[]>>
-) {
-    setStopwatchList((prev: StopwatchItem[]) =>
-        prev.filter((sw) => 
-            sw.id !== id
-        )
-    );
-}
-
 export function handleToggleStatus(
     id: string,
     newStatus: Status,
     setStopwatchList: React.Dispatch<React.SetStateAction<StopwatchItem[]>>
-) {
+): void {
     setStopwatchList(prev =>
         prev.map(sw => {
             if (sw.id !== id) return sw;
@@ -61,4 +50,40 @@ export function handleToggleStatus(
             }
         })
     );
+}
+
+export function handleDelete(
+    id: string,
+    setStopwatchList: React.Dispatch<React.SetStateAction<StopwatchItem[]>>
+): void {
+    setStopwatchList((prev: StopwatchItem[]) =>
+        prev.filter((sw) => 
+            sw.id !== id
+        )
+    );
+}
+
+export function stopwatch(
+    status: Status,
+    elapsedMs: number,
+): string {
+    if (status === 'idle') return '00:00:00,00';
+
+    const hours: string = String(
+        Math.floor(elapsedMs / (1000 * 60 * 60))
+    ).padStart(2, '0');
+
+    const minutes: string = String(
+        Math.floor((elapsedMs / (1000 * 60)) % 60)
+    ).padStart(2, '0');
+
+    const seconds: string = String(
+        Math.floor((elapsedMs / 1000) % 60)
+    ).padStart(2, '0');
+
+    const milliseconds: string = String(
+        Math.floor((elapsedMs % 1000) / 10)
+    ).padStart(2, '0');
+
+    return `${hours}:${minutes}:${seconds},${milliseconds}`;
 }

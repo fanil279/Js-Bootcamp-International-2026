@@ -2,6 +2,8 @@ export type Status = 'running' | 'paused' | 'idle';
 
 export interface StopwatchProps {
     status: Status;
+    elapsedMs: number;
+    startedAt: number | null;
     setStatus: (newStatus: Status) => void;
     onDelete: () => void;
 };

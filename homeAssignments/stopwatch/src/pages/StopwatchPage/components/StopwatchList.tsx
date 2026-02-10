@@ -21,6 +21,8 @@ const StopwatchList: FC<StopwatchListProps> = (
                     <Stopwatch
                         key={stopwatch.id}
                         status={stopwatch.status}
+                        elapsedMs={stopwatch.elapsedMs}
+                        startedAt={stopwatch.startedAt}
                         setStatus={(newStatus: Status) =>
                             handleToggleStatus(stopwatch.id, newStatus, setStopwatchList)
                         }

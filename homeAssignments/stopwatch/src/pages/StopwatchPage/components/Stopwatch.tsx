@@ -2,9 +2,16 @@ import { type FC, useEffect, useState } from 'react';
 import { Trash2 } from 'lucide-react';
 import Button from '../../../components/Button';
 import StopwatchControls from '../components/StopwatchControls';
+import { stopwatch } from '../../../utils/stopwatch.utils';
 import type { StopwatchProps } from '../../../types';
 
-const Stopwatch: FC<StopwatchProps> = ({ status, setStatus, onDelete }) => {
+const Stopwatch: FC<StopwatchProps> = ({
+    status,
+    elapsedMs,
+    startedAt,
+    setStatus,
+    onDelete
+}) => {
     const [, forceRender] = useState(0);
 
     useEffect(() => {
@@ -17,9 +24,13 @@ const Stopwatch: FC<StopwatchProps> = ({ status, setStatus, onDelete }) => {
         return () => clearInterval(interval);
     }, [status]);
 
+    const liveElapsed = (status === 'running' && startedAt)
+        ? elapsedMs + (Date.now() - startedAt)
+        : elapsedMs;
+
     return (
         <div className='stopwatch'>
-            <span className='stopwatch-time'>00:00:00,00</span>
+            <span className='stopwatch-time'>{stopwatch(status, liveElapsed)}</span>
 
             <StopwatchControls
                 status={status}
