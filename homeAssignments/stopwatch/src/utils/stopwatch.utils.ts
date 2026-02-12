@@ -15,7 +15,7 @@ export function handleAddStopwatch(
     ]);
 }
 
-export function handleToggleStatus(
+export function handleToggleState(
     id: string,
     newStatus: Status,
     setStopwatchList: React.Dispatch<React.SetStateAction<StopwatchItem[]>>

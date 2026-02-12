@@ -4,7 +4,7 @@ export interface StopwatchProps {
     status: Status;
     elapsedMs: number;
     startedAt: number | null;
-    setStatus: (newStatus: Status) => void;
+    setState: (newStatus: Status) => void;
     onDelete: () => void;
 };
 

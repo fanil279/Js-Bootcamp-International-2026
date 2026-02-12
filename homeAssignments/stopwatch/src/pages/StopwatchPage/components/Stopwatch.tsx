@@ -9,7 +9,7 @@ const Stopwatch: FC<StopwatchProps> = ({
     status,
     elapsedMs,
     startedAt,
-    setStatus,
+    setState,
     onDelete
 }) => {
     const [displayElapsed, setDisplayElapsed] = useState(() => elapsedMs);
@@ -32,10 +32,10 @@ const Stopwatch: FC<StopwatchProps> = ({
 
             <StopwatchControls
                 status={status}
-                onStart={() => setStatus('running')}
-                onPause={() => setStatus('paused')}
-                onResume={() => setStatus('running')}
-                onClear={() => setStatus('idle')}
+                onStart={() => setState('running')}
+                onPause={() => setState('paused')}
+                onResume={() => setState('running')}
+                onClear={() => setState('idle')}
             />
 
             <span id='delete-btn'>
