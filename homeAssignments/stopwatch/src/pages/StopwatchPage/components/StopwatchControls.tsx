@@ -1,4 +1,4 @@
-import { type FC, type JSX } from 'react';
+import type { FC, JSX } from 'react';
 import {
     Play,
     Pause,
@@ -7,9 +7,13 @@ import {
 import Button from '../../../components/Button';
 import type { StopwatchControlsProps } from '../../../types';
 
-const StopwatchControls: FC<StopwatchControlsProps> = (
-    { status, onStart, onPause, onResume, onClear }
-) => {
+const StopwatchControls: FC<StopwatchControlsProps> = ({
+    status,
+    onStart,
+    onPause,
+    onResume,
+    onClear
+}) => {
     let buttons: JSX.Element;
 
     switch (status) {

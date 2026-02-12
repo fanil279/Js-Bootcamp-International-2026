@@ -1,11 +1,8 @@
 export type Status = 'running' | 'paused' | 'idle';
 
 export interface StopwatchProps {
-    status: Status;
-    elapsedMs: number;
-    startedAt: number | null;
-    setState: (newStatus: Status) => void;
-    onDelete: () => void;
+    id: string;
+    setStopwatchList: React.Dispatch<React.SetStateAction<StopwatchItem[]>>;
 };
 
 export interface StopwatchItem {

@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import Stopwatch from '../components/Stopwatch';
-import { handleToggleState, handleDelete } from '../../../utils/stopwatch.utils';
-import type { Status, StopwatchItem, StopwatchListProps } from '../../../types';
+import type { StopwatchItem, StopwatchListProps } from '../../../types';
 
 const StopwatchList: FC<StopwatchListProps> = (
     { stopwatchList, setStopwatchList }
@@ -20,13 +19,8 @@ const StopwatchList: FC<StopwatchListProps> = (
                 {stopwatchList.map((stopwatch: StopwatchItem) => (
                     <Stopwatch
                         key={stopwatch.id}
-                        status={stopwatch.status}
-                        elapsedMs={stopwatch.elapsedMs}
-                        startedAt={stopwatch.startedAt}
-                        setState={(newStatus: Status) =>
-                            handleToggleState(stopwatch.id, newStatus, setStopwatchList)
-                        }
-                        onDelete={() => handleDelete(stopwatch.id, setStopwatchList)}
+                        id={stopwatch.id}
+                        setStopwatchList={setStopwatchList}
                     />
                 ))}
             </section>
