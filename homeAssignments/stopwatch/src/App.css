@@ -5,12 +5,6 @@
   align-items: start;
 }
 
-.stopwatch-container {
-  display: flex;
-  flex-direction: column;
-  margin-top: 1.5rem;
-}
-
 .primary    { background-color: #3B82F6; }
 .secondary  { background-color: #17a897; }
 .tertiary   { background-color: #8B5CF6; }
@@ -28,13 +22,19 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: clamp(0.8rem, 2vw, 1.2rem);
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .btn:hover {
   transform: translateY(-5px);
   opacity: 0.8;
+}
+
+.stopwatch-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.5rem;
 }
 
 .stopwatch {
@@ -54,14 +54,12 @@
   font-size: clamp(1.5rem, 4vw, 4.5rem);
   font-weight: bold;
   line-height: 1;
-  min-width: 250px;
   text-align: left;
 }
 
 .stopwatch-controls {
   display: flex;
   gap: 1.5rem;
-  flex-wrap: wrap;
 }
 
 .empty-message {

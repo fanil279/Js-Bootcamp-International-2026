@@ -16,7 +16,7 @@ const StopwatchList: FC<StopwatchListProps> = (
                 Click "Add Stopwatch" to get started!
             </h1>
         ) : (
-            <section className='stopwatch-list'>
+            <section>
                 {stopwatchList.map((stopwatch: StopwatchItem) => (
                     <Stopwatch
                         key={stopwatch.id}
