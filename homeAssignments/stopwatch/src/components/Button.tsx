@@ -1,23 +1,13 @@
-import type { FC, ReactNode, ButtonHTMLAttributes } from 'react';
-
-type ButtonVariant =
-    | 'addStopwatchBtn'
-    | 'startBtn'
-    | 'pauseBtn'
-    | 'clearBtn'
-    | 'deleteBtn';
-
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    children: ReactNode;
-    variant: ButtonVariant;
-}
+import { type FC } from 'react';
+import type { ButtonVariant, ButtonProps } from '../types';
 
 const VARIANTS: Record<ButtonVariant, string> = {
-    addStopwatchBtn: 'btn addStopwatchBtn',
-    startBtn: 'btn startBtn',
-    pauseBtn: 'btn pauseBtn',
-    clearBtn: 'btn clearBtn',
-    deleteBtn: 'btn deleteBtn',
+    primary: 'btn primary',
+    secondary: 'btn secondary',
+    tertiary: 'btn tertiary',
+    success: 'btn success',
+    warning: 'btn warning',
+    danger: 'btn danger',
 };
 
 const Button: FC<ButtonProps> = (

@@ -1,5 +1,5 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: system-ui, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -18,8 +18,24 @@
 
 body {
   margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
+  max-height: 100vh;
+}
+
+@media (max-width: 850px) {
+  .stopwatch {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stopwatch-time {
+    align-self: flex-start;
+  }
+}
+
+@media (max-width: 365px) {
+  .stopwatch-time {
+    align-self: center;
+  }
 }
 
 @media (prefers-color-scheme: light) {
