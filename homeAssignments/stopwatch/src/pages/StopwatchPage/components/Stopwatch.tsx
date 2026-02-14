@@ -1,4 +1,10 @@
-import { type FC, useEffect, useState } from 'react';
+import {
+    type FC,
+    useEffect,
+    useState,
+    useCallback,
+    useMemo,
+} from 'react';
 import { Trash2 } from 'lucide-react';
 import Button from '../../../components/Button';
 import StopwatchControls from '../components/StopwatchControls';
@@ -7,7 +13,7 @@ import type { Status, StopwatchProps } from '../../../types';
 
 const Stopwatch: FC<StopwatchProps> = ({ id, setStopwatchList }) => {
     const [status, setStatus] = useState<Status>('idle');
-    const [elapsedMs, setElapsedMs] = useState(0);
+    const [elapsedMs, setElapsedMs] = useState<number>(0);
     const [startedAt, setStartedAt] = useState<number | null>(null);
 
     const [displayElapsed, setDisplayElapsed] = useState(() => elapsedMs);
@@ -17,19 +23,19 @@ const Stopwatch: FC<StopwatchProps> = ({ id, setStopwatchList }) => {
 
         const interval = setInterval(() => {
             setDisplayElapsed(
-                elapsedMs + (Date.now() - startedAt)
+                (elapsedMs) + (Date.now() - startedAt)
             );
         }, 50);
 
         return () => clearInterval(interval);
     }, [status, startedAt, elapsedMs]);
 
-    const handleStopwatchStart = (): void => {
+    const handleStopwatchStart = useCallback((): void => {
         setStatus('running');
         setStartedAt(Date.now());
-    };
+    }, []);
 
-    const handleStopwatchPause = (): void => {
+    const handleStopwatchPause = useCallback((): void => {
         setStatus('paused');
 
         if (startedAt) {
@@ -39,18 +45,26 @@ const Stopwatch: FC<StopwatchProps> = ({ id, setStopwatchList }) => {
         }
 
         setStartedAt(null);
-    };
+    }, [startedAt]);
 
-    const handleStopwatchClear = (): void => {
+    const handleStopwatchClear = useCallback((): void => {
         setStatus('idle');
         setElapsedMs(0);
         setStartedAt(null);
-    };
+    }, []);
+
+    const handleRemoveSW = useCallback((): void => {
+        handleRemoveStopwatch(id, setStopwatchList);
+    }, [id, setStopwatchList]);
+
+    const formattedTime = useMemo((): string => (
+        stopwatchCalc(status, displayElapsed)
+    ), [status, displayElapsed]);
 
     return (
         <div className='stopwatch'>
             <span className='stopwatch-time'>
-                {stopwatchCalc(status, displayElapsed)}
+                {formattedTime}
             </span>
 
             <StopwatchControls
@@ -64,7 +78,7 @@ const Stopwatch: FC<StopwatchProps> = ({ id, setStopwatchList }) => {
             <span id='delete-btn'>
                 <Button
                     variant='danger'
-                    onClick={() => handleRemoveStopwatch(id, setStopwatchList)}
+                    onClick={handleRemoveSW}
                 >
                     <Trash2 size={20} />
                     Delete
