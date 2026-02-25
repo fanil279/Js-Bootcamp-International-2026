@@ -2,7 +2,7 @@ import { type FC, useState, useCallback } from 'react';
 import { Plus } from 'lucide-react';
 import Button from '../../../components/Button';
 import Stopwatch from '../components/Stopwatch';
-import ConfirmationDialog from './ConfirmationDialog';
+import ConfirmationDialog from '../modals/ConfirmationModal';
 import { handleAddStopwatch } from '../../../utils/stopwatch.utils';
 import type { StopwatchItem } from '../../../types';
 
