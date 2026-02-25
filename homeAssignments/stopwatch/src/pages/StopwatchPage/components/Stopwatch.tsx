@@ -2,8 +2,9 @@ import {
     type FC,
     useEffect,
     useState,
+    useRef,
     useCallback,
-    useMemo,
+    useMemo
 } from 'react';
 import { Trash2 } from 'lucide-react';
 import Button from '../../../components/Button';
@@ -18,17 +19,33 @@ const Stopwatch: FC<StopwatchProps> = ({ id, setStopwatchList }) => {
 
     const [displayElapsed, setDisplayElapsed] = useState(() => elapsedMs);
 
+    const elapsedRef = useRef<number>(0);
+    const startedAtRef = useRef<number | null>(null);
+
     useEffect(() => {
-        if (status !== 'running' || !startedAt) return;
+        elapsedRef.current = elapsedMs;
+    }, [elapsedMs]);
 
-        const interval = setInterval(() => {
+    useEffect(() => {
+        startedAtRef.current = startedAt;
+    }, [startedAt]);
+
+    useEffect(() => {
+        if (status !== 'running') return;
+
+        const intervalId = setInterval(() => {
+            const start = startedAtRef.current;
+            const base = elapsedRef.current;
+
+            if (start == null) return;
+
             setDisplayElapsed(
-                (elapsedMs) + (Date.now() - startedAt)
+                (base) + (Date.now() - start)
             );
-        }, 50);
+        }, 16);
 
-        return () => clearInterval(interval);
-    }, [status, startedAt, elapsedMs]);
+        return () => clearInterval(intervalId);
+    }, [status]);
 
     const handleStopwatchStart = useCallback((): void => {
         setStatus('running');
@@ -50,6 +67,7 @@ const Stopwatch: FC<StopwatchProps> = ({ id, setStopwatchList }) => {
     const handleStopwatchClear = useCallback((): void => {
         setStatus('idle');
         setElapsedMs(0);
+        setDisplayElapsed(0);
         setStartedAt(null);
     }, []);
 

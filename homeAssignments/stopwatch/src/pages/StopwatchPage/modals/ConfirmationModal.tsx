@@ -4,7 +4,7 @@ import type { ConfirmDialogProps } from '../../../types';
 
 const ConfirmationDialog: FC<ConfirmDialogProps> = ({ onCancel, onConfirm }) => {
     useEffect(() => {
-        const handleClick = (): void => {
+        const handleClick = () => {
             console.log(
                 'Clicked detected. useEffect is not cleared. Memory Leak created.'
             );
