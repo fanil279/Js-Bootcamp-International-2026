@@ -1,7 +1,6 @@
-import { type FC } from 'react';
 import StopwatchList from './components/StopwatchList';
 
-const StopwatchPage: FC = () => (
+const StopwatchPage = () => (
     <main className='stopwatch-container'>
         <StopwatchList />
     </main>
