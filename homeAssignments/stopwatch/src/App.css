@@ -52,6 +52,7 @@
 
 .stopwatch-time {
   font-size: clamp(1.5rem, 4vw, 4.5rem);
+  font-variant-numeric: tabular-nums;
   font-weight: bold;
   line-height: 1;
   text-align: left;
