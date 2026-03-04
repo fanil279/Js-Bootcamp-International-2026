@@ -1,4 +1,4 @@
-import { type FC, useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { Plus } from 'lucide-react';
 import Button from '../../../components/Button';
 import Stopwatch from '../components/Stopwatch';
@@ -6,7 +6,7 @@ import ConfirmationDialog from '../modals/ConfirmationModal';
 import { handleAddStopwatch } from '../../../utils/stopwatch.utils';
 import type { StopwatchItem } from '../../../types';
 
-const StopwatchList: FC = () => {
+const StopwatchList = () => {
     const [stopwatchList, setStopwatchList] = useState<StopwatchItem[]>([]);
     const [open, setOpen] = useState<boolean>(false);
 
