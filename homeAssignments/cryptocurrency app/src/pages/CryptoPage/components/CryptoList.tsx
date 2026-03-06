@@ -1,21 +1,41 @@
-import { useCryptoPrice } from '../../../hooks/useCrypto';
-import Preloader from '../../../components/Preloader';
+import { useState } from 'react';
+import CryptoCard from './CryptoTable';
+import Search from './Search';
 
 const CryptoPage = () => {
-    const { isPending, isError, data, error } = useCryptoPrice('DOGE');
+    const [trackedCurr, setTrackedCurr] = useState<string[]>(['DOGE']);
+    const [searchValue, setSearchValue] = useState('');
 
-    if (isPending) return <Preloader />;
-    if (isError) return <div className='error'>Error occurred: {error.message}</div>;
+    const handleSearch = () => {
+        const normalized = searchValue.trim().toUpperCase();
+
+        if (!normalized) return;
+
+        setTrackedCurr((prev) => 
+            prev.includes(normalized)
+                ? prev
+                : [...prev, normalized]
+        );
+
+        setSearchValue('');
+    };
 
     return (
-        <div className='crypto-list'>
-            <h1>Crypto Page</h1>
+        <>
+            <Search
+                value={searchValue}
+                handleChange={setSearchValue}
+                handleSearch={handleSearch}
+            />
+            
+            <div className='crypto-list'>
+                <h1>Crypto Page</h1>
 
-            <div className='crypto-item'>
-                <h2 className='crypto-currency'>DOGE</h2>
-                <p className='crypto-price'>Price: ${data?.USD}</p>
+                {trackedCurr.map((curr) => (
+                    <CryptoCard key={curr} symbol={curr} />
+                ))}
             </div>
-        </div>
+        </>
     );
 }
 
