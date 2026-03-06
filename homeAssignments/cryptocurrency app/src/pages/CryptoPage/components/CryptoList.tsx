@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import CryptoCard from './CryptoTable';
+import CryptoTable from './CryptoTable';
 import Search from './Search';
 
 const CryptoPage = () => {
@@ -32,7 +32,7 @@ const CryptoPage = () => {
                 <h1>Crypto Page</h1>
 
                 {trackedCurr.map((curr) => (
-                    <CryptoCard key={curr} symbol={curr} />
+                    <CryptoTable key={curr} symbol={curr} />
                 ))}
             </div>
         </>

@@ -5,11 +5,13 @@ body {
 }
 
 .preloader {
-  min-height: 100vh;
+  position: fixed;
+  inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(4px);
 }
 
 .spinner {
@@ -24,6 +26,8 @@ body {
 
 .primary    { background-color: #3B82F6; }
 .secondary  { background-color: #17a897; }
+.tertiary   { background-color: #8B5CF6; }
+.danger     { background-color: #EF4444; }
 
 .btn {
   display: inline-flex;
