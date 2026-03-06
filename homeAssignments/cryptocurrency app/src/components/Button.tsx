@@ -4,10 +4,6 @@ import type { ButtonVariant, ButtonProps } from '../types';
 const VARIANTS: Record<ButtonVariant, string> = {
     primary: 'btn primary',
     secondary: 'btn secondary',
-    tertiary: 'btn tertiary',
-    success: 'btn success',
-    warning: 'btn warning',
-    danger: 'btn danger',
 };
 
 const Button: FC<ButtonProps> = (
