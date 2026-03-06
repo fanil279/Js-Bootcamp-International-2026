@@ -1,10 +1,11 @@
 import { useCryptoPrice } from '../../../hooks/useCrypto';
+import Preloader from '../../../components/Preloader';
 
 const CryptoPage = () => {
     const { isPending, isError, data, error } = useCryptoPrice('DOGE');
 
-    if (isPending) return <div>Loading...</div>;
-    if (isError) return <div>Error occurred: {error.message}</div>;
+    if (isPending) return <Preloader />;
+    if (isError) return <div className='error'>Error occurred: {error.message}</div>;
 
     return (
         <div className='crypto-list'>

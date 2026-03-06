@@ -11,7 +11,7 @@ class CryptoService {
                 api_key: import.meta.env.VITE_API_KEY,
             },
         });
-
+        
         return response.data;
     };
 }
