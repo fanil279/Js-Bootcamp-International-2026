@@ -40,13 +40,13 @@ const CryptoPage = () => {
                 updates[symbol] = nextTrend;
                 prevPricesRef.current[symbol] = price;
                 lastUpdatedAtRef.current[symbol] = updatedAt;
-
-                setTrend((prev) => ({
-                    ...prev,
-                    ...updates,
-                }));
             }
         });
+
+        setTrend((prev) => ({
+            ...prev,
+            ...updates,
+        }));
     }, [trackedCurr, queryResults]);
 
     const handleSearch = () => {
