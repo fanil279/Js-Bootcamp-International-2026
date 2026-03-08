@@ -41,14 +41,10 @@ const CryptoPage = () => {
                 prevPricesRef.current[symbol] = price;
                 lastUpdatedAtRef.current[symbol] = updatedAt;
 
-                if (Object.keys(updates).length > 0) {
-                    setTrend((prev) => (
-                        {
-                            ...prev,
-                            ...updates,
-                        }
-                    ));
-                }
+                setTrend((prev) => ({
+                    ...prev,
+                    ...updates,
+                }));
             }
         });
     }, [trackedCurr, queryResults]);
