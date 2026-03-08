@@ -3,19 +3,21 @@ import { useCryptoPrices } from '../../../hooks/useCrypto';
 import CryptoTable from './CryptoTable';
 import Preloader from '../../../components/Preloader';
 import Search from './Search';
-import type { CryptoRow } from '../../../types';
+import type { Trend, CryptoRow } from '../../../types';
 
 const CryptoPage = () => {
     const [trackedCurr, setTrackedCurr] = useState(['DOGE']);
     const [searchValue, setSearchValue] = useState('');
+    const [trend, setTrend] = useState<Record<string, Trend>>({});
 
     const prevPricesRef = useRef<Record<string, number>>({});
     const lastUpdatedAtRef = useRef<Record<string, number>>({});
-    const trendRef = useRef<Record<string, 'up' | 'down' | 'plateau'>>({});
 
     const queryResults = useCryptoPrices(trackedCurr);
 
     useEffect(() => {
+        const updates: Record<string, Trend> = {};
+
         trackedCurr.forEach((symbol, i) => {
             const query = queryResults[i];
 
@@ -23,20 +25,30 @@ const CryptoPage = () => {
 
             const price = query.data.USD;
             const updatedAt = query.dataUpdatedAt;
+            
             const prevPrice = prevPricesRef.current[symbol];
             const lastUpdatedAt = lastUpdatedAtRef.current[symbol];
 
             if (lastUpdatedAt !== updatedAt) {
-                let trend: 'up' | 'down' | 'plateau' = 'plateau';
+                let nextTrend: Trend = 'plateau';
 
-                if (prevPrice) {
-                    if (price > prevPrice) trend = 'up';
-                    else if (price < prevPrice) trend = 'down';
+                if (prevPrice !== undefined) {
+                    if (price > prevPrice) nextTrend = 'up';
+                    else if (price < prevPrice) nextTrend = 'down';
                 }
 
-                trendRef.current[symbol] = trend;
+                updates[symbol] = nextTrend;
                 prevPricesRef.current[symbol] = price;
                 lastUpdatedAtRef.current[symbol] = updatedAt;
+
+                if (Object.keys(updates).length > 0) {
+                    setTrend((prev) => (
+                        {
+                            ...prev,
+                            ...updates,
+                        }
+                    ));
+                }
             }
         });
     }, [trackedCurr, queryResults]);
@@ -82,14 +94,14 @@ const CryptoPage = () => {
             }
 
             return {
-                symbol,
-                price: query.data?.USD ?? null,
-                trend: trendRef.current[symbol] ?? 'plateau',
+                symbol: symbol,
+                price: query.data?.USD,
+                trend: trend[symbol],
                 status: 'success',
                 errorMessage: undefined,
             };
         });
-    }, [trackedCurr, queryResults]);
+    }, [trackedCurr, queryResults, trend]);
 
     const hasLoading = queryResults.some((query) => query.isPending);
     const hasError = queryResults.some((query) => query.isError);

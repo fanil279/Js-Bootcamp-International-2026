@@ -1,8 +1,10 @@
+import type { Trend } from './crypto-list.types';
+
 export type CryptoRow = {
     symbol: string;
     price: number | null;
     status: 'loading' | 'error' | 'success';
-    trend: 'up' | 'down' | 'plateau';
+    trend: Trend;
     errorMessage?: string;
 };
 
