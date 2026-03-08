@@ -85,7 +85,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin: 20px 0;
+  margin: 20px 5px;
 }
 
 .search {
@@ -112,10 +112,59 @@ body {
   box-shadow: 0 0 0 3px rgba(79,70,229,0.15);
 }
 
+.crypto-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #111;
+  color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.crypto-table thead {
+  background: #1f2937;
+}
+
+.crypto-table th {
+  text-align: left;
+  padding: 14px 16px;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+
+.crypto-table tbody tr {
+  transition: background 0.2s ease;
+}
+
+.crypto-table tbody tr:hover {
+  background: #1f2937;
+}
+
+.crypto-table td {
+  padding: 14px 16px;
+  font-size: 15px;
+}
+
+.trend-up {
+  color: #22c55e;
+}
+
+.trend-down {
+  color: #ef4444;
+}
+
+.trend-plateau {
+  color: #9ca3af;
+}
+
 .error {
   color: red;
   font-weight: bold;
   font-style: italic;
+  text-align: center;
   font-size: clamp(1rem, 2vw, 2.5rem);
   margin-top: 20px;
 }

@@ -4,6 +4,17 @@
   }
 }
 
+@media (max-width: 480px) {
+  .search-container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(10%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .spinner {
     animation: none;

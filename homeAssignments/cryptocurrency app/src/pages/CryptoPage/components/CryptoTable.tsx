@@ -1,28 +1,79 @@
-import { useCryptoPrice } from '../../../hooks/useCrypto';
-import Preloader from '../../../components/Preloader';
-import type { CryptoCardProps } from '../../../types';
+import {
+    createColumnHelper,
+    flexRender,
+    getCoreRowModel,
+    useReactTable,
+} from '@tanstack/react-table';
+import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
+import type { CryptoTableProps, CryptoRow } from '../../../types';
 
-const CryptoCard = ({ symbol }: CryptoCardProps) => {
-    const { isPending, isError, data, error } = useCryptoPrice(symbol);
+const columnHelper = createColumnHelper<CryptoRow>();
 
-    if (isPending) {
-        return <div className='crypto-card'><Preloader /></div>;
-    }
+const columns = [
+    columnHelper.accessor('symbol', {
+        header: 'Currency',
+        cell: (info) => info.getValue(),
+    }),
 
-    if (isError) {
-        return (
-            <div className='error'>
-                Error loading {symbol}: {error.message}
-            </div>
-        );
-    }
+    columnHelper.accessor('price', {
+        header: 'Price (usd)',
+        cell: (info) => info.getValue(),
+    }),
+
+    columnHelper.accessor('trend', {
+        header: 'Trend',
+        cell: (info) =>{
+            const trend = info.getValue();
+
+            if (trend === 'up') return <TrendingUp size={16} className='trend-up' />;
+            else if (trend === 'down') return <TrendingDown size={16} className='trend-down' />;
+            else return <Minus size={16} className='trend-plateau' />;
+        }
+    })
+];
+
+const CryptoTable = ({ rows }: CryptoTableProps) => {
+    const table = useReactTable({
+        data: rows,
+        columns: columns,
+        getCoreRowModel: getCoreRowModel(),
+    });
 
     return (
-        <div className='crypto-card'>
-            <h2 className='crypto-currency'>{symbol}</h2>
-            <p className='crypto-price'>Price: ${data?.USD}</p>
-        </div>
+        <table className='crypto-table'>
+            <thead>
+                {table.getHeaderGroups().map((headerGroup) => (
+                    <tr key={headerGroup.id}>
+                        {headerGroup.headers.map((header) => (
+                            <th key={header.id}>
+                                {header.isPlaceholder
+                                    ? null
+                                    : flexRender(
+                                        header.column.columnDef.header,
+                                        header.getContext()
+                                    )}
+                            </th>
+                        ))}
+                    </tr>
+                ))}
+            </thead>
+
+            <tbody>
+                {table.getRowModel().rows.map((row) => (
+                    <tr key={row.id}>
+                        {row.getVisibleCells().map((cell) => (
+                            <td key={cell.id}>
+                                {flexRender(
+                                    cell.column.columnDef.cell,
+                                    cell.getContext()
+                                )}
+                            </td>
+                        ))}
+                    </tr>
+                ))}
+            </tbody>
+        </table>
     );
 };
 
-export default CryptoCard;
+export default CryptoTable;

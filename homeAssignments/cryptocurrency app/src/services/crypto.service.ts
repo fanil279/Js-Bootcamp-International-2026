@@ -11,8 +11,14 @@ class CryptoService {
                 api_key: import.meta.env.VITE_API_KEY,
             },
         });
+
+        const data = response.data;
+
+        if (data.Response === 'Error') {
+            throw new Error(`Currency '${symbol}' was not found`);
+        }
         
-        return response.data;
+        return data;
     };
 }
 
