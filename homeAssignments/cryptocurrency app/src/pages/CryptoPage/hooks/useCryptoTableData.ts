@@ -11,8 +11,6 @@ export const useCryptoTableData = (trackedCurr: string[]) => {
     const queryResults = useCryptoPrices(trackedCurr);
 
     useEffect(() => {
-        const updates: CryptoState = {};
-
         trackedCurr.forEach((currency, i) => {
             const query = queryResults[i];
 
@@ -32,18 +30,15 @@ export const useCryptoTableData = (trackedCurr: string[]) => {
                     else if (price < prevPrice) nextTrend = 'down';
                 }
 
-                updates[currency] = nextTrend;
                 prevPricesRef.current[currency] = price;
                 lastUpdatedAtRef.current[currency] = updatedAt;
+
+                setTrend((prev) => ({
+                    ...prev,
+                    [currency]: nextTrend,
+                }));
             }
         });
-
-        if (Object.keys(updates).length > 0) {
-            setTrend((prev) => ({
-                ...prev,
-                ...updates,
-            }));
-        }
     }, [trackedCurr, queryResults]);
 
     const rows = useMemo<CryptoRow[]>(() => {
