@@ -1,53 +1,14 @@
-import { useState, useEffect, useMemo, useRef } from 'react';
-import { useCryptoPrices } from '../../../hooks/useCrypto';
+import { useState } from 'react';
+import { useCryptoTableData } from '../hooks/useCryptoTableData';
 import CryptoTable from './CryptoTable';
 import Preloader from '../../../components/Preloader';
 import Search from './Search';
-import type { Trend, CryptoRow } from '../../../types';
 
 const CryptoPage = () => {
     const [trackedCurr, setTrackedCurr] = useState(['DOGE']);
     const [searchValue, setSearchValue] = useState('');
-    const [trend, setTrend] = useState<Record<string, Trend>>({});
 
-    const prevPricesRef = useRef<Record<string, number>>({});
-    const lastUpdatedAtRef = useRef<Record<string, number>>({});
-
-    const queryResults = useCryptoPrices(trackedCurr);
-
-    useEffect(() => {
-        const updates: Record<string, Trend> = {};
-
-        trackedCurr.forEach((currency, i) => {
-            const query = queryResults[i];
-
-            if (!query?.isSuccess) return;
-
-            const price = query.data.USD;
-            const updatedAt = query.dataUpdatedAt;
-            
-            const prevPrice = prevPricesRef.current[currency];
-            const lastUpdatedAt = lastUpdatedAtRef.current[currency];
-
-            if (lastUpdatedAt !== updatedAt) {
-                let nextTrend: Trend = 'plateau';
-
-                if (prevPrice !== undefined) {
-                    if (price > prevPrice) nextTrend = 'up';
-                    else if (price < prevPrice) nextTrend = 'down';
-                }
-
-                updates[currency] = nextTrend;
-                prevPricesRef.current[currency] = price;
-                lastUpdatedAtRef.current[currency] = updatedAt;
-            }
-        });
-
-        setTrend((prev) => ({
-            ...prev,
-            ...updates,
-        }));
-    }, [trackedCurr, queryResults]);
+    const { rows, hasLoading, hasError } = useCryptoTableData(trackedCurr);
 
     const handleSearch = () => {
         const normalized = searchValue.trim().toUpperCase();
@@ -62,45 +23,6 @@ const CryptoPage = () => {
 
         setSearchValue('');
     };
-
-    const rows = useMemo<CryptoRow[]>(() => {
-        return trackedCurr.map((currency, i) => {
-            const query = queryResults[i];
-            
-            if (!query || query.isPending) {
-                return {
-                    currency,
-                    price: null,
-                    trend: 'plateau',
-                    status: 'loading',
-                };
-            }
-
-            if (query.isError) {
-                return {
-                    currency,
-                    price: null,
-                    trend: 'plateau',
-                    status: 'error',
-                    errorMessage:
-                        query.error instanceof Error
-                            ? query.error.message
-                            : 'Unknown error',
-                };
-            }
-
-            return {
-                currency: currency,
-                price: query.data?.USD,
-                trend: trend[currency],
-                status: 'success',
-                errorMessage: undefined,
-            };
-        });
-    }, [trackedCurr, queryResults, trend]);
-
-    const hasLoading = queryResults.some((query) => query.isPending);
-    const hasError = queryResults.some((query) => query.isError);
 
     if (hasLoading) return <Preloader />;
     if (hasError) return <div className='error'>Error loading the currency</div>;
