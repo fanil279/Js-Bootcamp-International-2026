@@ -18,7 +18,7 @@ const CryptoPage = () => {
     useEffect(() => {
         const updates: Record<string, Trend> = {};
 
-        trackedCurr.forEach((symbol, i) => {
+        trackedCurr.forEach((currency, i) => {
             const query = queryResults[i];
 
             if (!query?.isSuccess) return;
@@ -26,8 +26,8 @@ const CryptoPage = () => {
             const price = query.data.USD;
             const updatedAt = query.dataUpdatedAt;
             
-            const prevPrice = prevPricesRef.current[symbol];
-            const lastUpdatedAt = lastUpdatedAtRef.current[symbol];
+            const prevPrice = prevPricesRef.current[currency];
+            const lastUpdatedAt = lastUpdatedAtRef.current[currency];
 
             if (lastUpdatedAt !== updatedAt) {
                 let nextTrend: Trend = 'plateau';
@@ -37,9 +37,9 @@ const CryptoPage = () => {
                     else if (price < prevPrice) nextTrend = 'down';
                 }
 
-                updates[symbol] = nextTrend;
-                prevPricesRef.current[symbol] = price;
-                lastUpdatedAtRef.current[symbol] = updatedAt;
+                updates[currency] = nextTrend;
+                prevPricesRef.current[currency] = price;
+                lastUpdatedAtRef.current[currency] = updatedAt;
             }
         });
 
@@ -64,21 +64,21 @@ const CryptoPage = () => {
     };
 
     const rows = useMemo<CryptoRow[]>(() => {
-        return trackedCurr.map((symbol, i) => {
+        return trackedCurr.map((currency, i) => {
             const query = queryResults[i];
             
             if (!query || query.isPending) {
                 return {
-                    symbol,
+                    currency,
                     price: null,
+                    trend: 'plateau',
                     status: 'loading',
-                    trend: 'plateau'
                 };
             }
 
             if (query.isError) {
                 return {
-                    symbol,
+                    currency,
                     price: null,
                     trend: 'plateau',
                     status: 'error',
@@ -90,9 +90,9 @@ const CryptoPage = () => {
             }
 
             return {
-                symbol: symbol,
+                currency: currency,
                 price: query.data?.USD,
-                trend: trend[symbol],
+                trend: trend[currency],
                 status: 'success',
                 errorMessage: undefined,
             };

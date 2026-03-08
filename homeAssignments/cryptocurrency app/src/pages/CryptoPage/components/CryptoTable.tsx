@@ -7,20 +7,20 @@ import {
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
 import type { CryptoTableProps, CryptoRow } from '../../../types';
 
-const columnHelper = createColumnHelper<CryptoRow>();
+const columnDef = createColumnHelper<CryptoRow>();
 
 const columns = [
-    columnHelper.accessor('symbol', {
+    columnDef.accessor('currency', {
         header: 'Currency',
         cell: (info) => info.getValue(),
     }),
 
-    columnHelper.accessor('price', {
+    columnDef.accessor('price', {
         header: 'Price (usd)',
         cell: (info) => info.getValue(),
     }),
 
-    columnHelper.accessor('trend', {
+    columnDef.accessor('trend', {
         header: 'Trend',
         cell: (info) =>{
             const trend = info.getValue();

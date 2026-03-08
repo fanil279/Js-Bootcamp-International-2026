@@ -1,12 +1,12 @@
 import { useQueries } from '@tanstack/react-query';
 import CryptoService from '../services/crypto.service';
 
-export const useCryptoPrices = (symbols: string[]) => {
+export const useCryptoPrices = (currencies: string[]) => {
     return useQueries({
-        queries: symbols.map((symbol) => ({
-            queryKey: ['crypto-price', symbol],
-            queryFn: () => CryptoService.getCryptoCurrency(symbol),
-            enabled: Boolean(symbol),
+        queries: currencies.map((currency) => ({
+            queryKey: ['crypto-price', currency],
+            queryFn: () => CryptoService.getCryptoCurrency(currency),
+            enabled: Boolean(currency),
         })),
     });
 };
