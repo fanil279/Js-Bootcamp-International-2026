@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useCryptoTableData } from '../hooks/useCryptoTableData';
-import CryptoTable from './CryptoTable';
 import Preloader from '../../../components/Preloader';
 import Search from './Search';
+import Table from '../../../shared/Table';
+import { columns } from '../config/cryptoColumns';
 
 const CryptoPage = () => {
     const [trackedCurr, setTrackedCurr] = useState(['DOGE']);
@@ -38,7 +39,7 @@ const CryptoPage = () => {
             <div className='crypto-list'>
                 <h1>Crypto Page</h1>
 
-                <CryptoTable rows={rows} />
+                <Table data={rows} columns={columns} className='crypto-table'/>
             </div>
         </>
     );
