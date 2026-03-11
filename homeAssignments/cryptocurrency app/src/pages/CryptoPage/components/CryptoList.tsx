@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useCryptoTableData } from '../hooks/useCryptoTableData';
-import Preloader from '../../../components/Preloader';
+import Preloader from '../../../components/Preloader/Preloader';
 import Search from './Search';
 import Table from '../../../shared/Table';
 import { columns } from '../config/cryptoColumns';

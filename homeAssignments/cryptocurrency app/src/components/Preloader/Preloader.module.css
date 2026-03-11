@@ -1,0 +1,19 @@
+.preloader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(4px);
+}
+
+.spinner {
+  width: 80px;
+  height: 80px;
+  border: 5px solid rgba(37, 99, 235, 0.2);
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  will-change: transform;
+  animation: spin 0.9s ease-in-out infinite;
+}

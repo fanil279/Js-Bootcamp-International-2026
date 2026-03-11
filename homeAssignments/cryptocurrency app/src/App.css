@@ -4,26 +4,6 @@ body {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-.preloader {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(4px);
-}
-
-.spinner {
-  width: 80px;
-  height: 80px;
-  border: 5px solid rgba(37, 99, 235, 0.2);
-  border-top-color: #2563eb;
-  border-radius: 50%;
-  will-change: transform;
-  animation: spin 0.9s ease-in-out infinite;
-}
-
 .primary    { background-color: #3B82F6; }
 .secondary  { background-color: #17a897; }
 .tertiary   { background-color: #8B5CF6; }
