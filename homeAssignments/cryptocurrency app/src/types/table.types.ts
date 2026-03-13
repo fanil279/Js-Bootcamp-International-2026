@@ -1,11 +1,13 @@
 import type { ColumnDef } from '@tanstack/react-table';
-import type { Trend } from './crypto-list.types';
+import type { Trend, ButtonVariant } from './index';
 
 export type CryptoRow = {
     currency: string;
     price: number | null;
-    status: 'loading' | 'error' | 'success';
     trend: Trend;
+    updateBtn: ButtonVariant;
+    deleteBtn: ButtonVariant;
+    status: 'loading' | 'error' | 'success';
     errorMessage?: string;
 };
 

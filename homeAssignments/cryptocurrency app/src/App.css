@@ -6,16 +6,15 @@ body {
 
 .primary    { background-color: #3B82F6; }
 .secondary  { background-color: #17a897; }
-.tertiary   { background-color: #8B5CF6; }
 .danger     { background-color: #EF4444; }
 
 .btn {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  gap: 0.7rem;
   color: white;
-  padding: 10px 20px;
+  padding: 5px 10px;
+  margin-right: 0.5rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -138,6 +137,12 @@ body {
 
 .trend-plateau {
   color: #9ca3af;
+}
+
+.controls-cell, .controls-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .error {

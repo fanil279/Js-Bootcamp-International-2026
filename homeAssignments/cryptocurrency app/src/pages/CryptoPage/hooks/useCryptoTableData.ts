@@ -50,6 +50,8 @@ export const useCryptoTableData = (trackedCurr: string[]) => {
                     currency,
                     price: null,
                     trend: 'plateau',
+                    updateBtn: 'secondary',
+                    deleteBtn: 'danger',
                     status: 'loading',
                 };
             }
@@ -59,6 +61,8 @@ export const useCryptoTableData = (trackedCurr: string[]) => {
                     currency,
                     price: null,
                     trend: 'plateau',
+                    updateBtn: 'secondary',
+                    deleteBtn: 'danger',
                     status: 'error',
                     errorMessage:
                         query.error instanceof Error
@@ -71,6 +75,8 @@ export const useCryptoTableData = (trackedCurr: string[]) => {
                 currency,
                 price: query.data?.USD ?? null,
                 trend: trend[currency] ?? 'plateau',
+                updateBtn: 'secondary',
+                deleteBtn: 'danger',
                 status: 'success',
                 errorMessage: undefined,
             };

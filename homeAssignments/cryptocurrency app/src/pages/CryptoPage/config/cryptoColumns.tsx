@@ -1,10 +1,14 @@
 import { createColumnHelper } from '@tanstack/react-table';
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
-import type { CryptoRow } from '../../../types';
+import Button from '../../../components/Button';
+import type { CryptoRow, CryptoColumnHandlers } from '../../../types';
 
 const columnDef = createColumnHelper<CryptoRow>();
 
-export const columns = [
+export const getCryptoColumns = ({
+    handleUpdate,
+    handleDelete,
+}: CryptoColumnHandlers) => [
     columnDef.accessor('currency', {
         header: 'Currency',
         cell: (info) => info.getValue(),
@@ -17,12 +21,40 @@ export const columns = [
 
     columnDef.accessor('trend', {
         header: 'Trend',
-        cell: (info) =>{
+        cell: (info) => {
             const trend = info.getValue();
 
-            if (trend === 'up') return <TrendingUp size={16} className='trend-up' />;
-            else if (trend === 'down') return <TrendingDown size={16} className='trend-down' />;
-            else return <Minus size={16} className='trend-plateau' />;
-        }
-    })
+            if (trend === 'up') {
+                return <TrendingUp size={16} className='trend-up' />;
+            }
+
+            if (trend === 'down') {
+                return <TrendingDown size={16} className='trend-down' />;
+            }
+
+            return <Minus size={16} className='trend-plateau' />;
+        },
+    }),
+
+    columnDef.display({
+        id: 'controls',
+        header: () => <span className='controls-header'>Controls</span>,
+        cell: ({ row }) => (
+            <div className='controls-cell'>
+                <Button
+                    variant='primary'
+                    onClick={() => handleUpdate(row.original)}
+                >
+                    Update
+                </Button>
+
+                <Button
+                    variant='danger'
+                    onClick={() => handleDelete(row.original)}
+                >
+                    Delete
+                </Button>
+            </div>
+        ),
+    }),
 ];

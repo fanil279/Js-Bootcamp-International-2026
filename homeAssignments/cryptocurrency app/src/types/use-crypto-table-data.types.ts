@@ -1,3 +1,3 @@
-import type { Trend } from './crypto-list.types';
+import type { Trend } from './index';
 
 export type CryptoState = Record<string, Trend>;
