@@ -1,0 +1,103 @@
+import { useEffect, useMemo, useRef, useState, useDebugValue } from 'react';
+import { useCryptoPrices } from '../../../hooks/useCrypto';
+import type { CryptoRow, Trend, CryptoState } from '../../../types';
+
+export const useCryptoTableData = (trackedCurr: string[]) => {
+    const [trend, setTrend] = useState<CryptoState>({});
+
+    const prevPricesRef = useRef<Record<string, number>>({});
+    const lastUpdatedAtRef = useRef<Record<string, number>>({});
+
+    const queryResults = useCryptoPrices(trackedCurr);
+
+    useEffect(() => {
+        trackedCurr.forEach((currency, i) => {
+            const query = queryResults[i];
+
+            if (!query?.isSuccess) return;
+
+            const price = query.data.USD;
+            const updatedAt = query.dataUpdatedAt;
+
+            const prevPrice = prevPricesRef.current[currency];
+            const lastUpdatedAt = lastUpdatedAtRef.current[currency];
+
+            if (lastUpdatedAt !== updatedAt) {
+                let nextTrend: Trend = 'plateau';
+
+                if (prevPrice !== undefined) {
+                    if (price > prevPrice) nextTrend = 'up';
+                    else if (price < prevPrice) nextTrend = 'down';
+                }
+
+                prevPricesRef.current[currency] = price;
+                lastUpdatedAtRef.current[currency] = updatedAt;
+
+                setTrend((prev) => ({
+                    ...prev,
+                    [currency]: nextTrend,
+                }));
+            }
+        });
+    }, [trackedCurr, queryResults]);
+
+    const rows = useMemo<CryptoRow[]>(() => {
+        return trackedCurr.map((currency, i) => {
+            const query = queryResults[i];
+
+            if (!query || query.isPending) {
+                return {
+                    currency,
+                    price: null,
+                    trend: 'plateau',
+                    updateAllBtn: 'updateAll',
+                    updateBtn: 'update',
+                    deleteBtn: 'delete',
+                    status: 'loading',
+                };
+            }
+
+            if (query.isError) {
+                return {
+                    currency,
+                    price: null,
+                    trend: 'plateau',
+                    updateAllBtn: 'updateAll',
+                    updateBtn: 'update',
+                    deleteBtn: 'delete',
+                    status: 'error',
+                    errorMessage:
+                        query.error instanceof Error
+                            ? query.error.message
+                            : 'Unknown error',
+                };
+            }
+
+            return {
+                currency,
+                price: query.data?.USD ?? null,
+                trend: trend[currency] ?? 'plateau',
+                updateAllBtn: 'updateAll',
+                updateBtn: 'update',
+                deleteBtn: 'delete',
+                status: 'success',
+                errorMessage: undefined,
+            };
+        });
+    }, [trackedCurr, queryResults, trend]);
+
+    const hasLoading = queryResults.some((query) => query.isPending);
+    const hasError = queryResults.some((query) => query.isError);
+
+    useDebugValue({
+        trackedCount: trackedCurr.length,
+        hasLoading: hasLoading,
+        hasError: hasError,
+    });
+
+    return {
+        rows,
+        hasLoading,
+        hasError,
+    };
+};
