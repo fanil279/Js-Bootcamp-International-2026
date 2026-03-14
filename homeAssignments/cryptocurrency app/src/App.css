@@ -26,6 +26,12 @@ body {
   opacity: 0.8;
 }
 
+#update-all {
+  position: fixed;
+  top: 11.4rem;
+  left: 1.4rem;
+}
+
 .crypto-container {
   display: flex;
   flex-wrap: wrap;
@@ -37,7 +43,7 @@ body {
 .crypto-container h1 {
   width: 100%;
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 
 .crypto-card {

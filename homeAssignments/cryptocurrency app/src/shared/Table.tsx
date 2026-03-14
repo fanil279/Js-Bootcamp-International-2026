@@ -1,3 +1,4 @@
+import React from 'react';
 import {
     flexRender,
     getCoreRowModel,
@@ -5,7 +6,7 @@ import {
 } from '@tanstack/react-table';
 import type { TableProps } from '../types';
 
-const CryptoTable = <T,>({ data, columns, className }: TableProps<T>) => {
+const Table = <T,>({ data, columns, className }: TableProps<T>) => {
     const table = useReactTable({
         data: data,
         columns: columns,
@@ -48,5 +49,7 @@ const CryptoTable = <T,>({ data, columns, className }: TableProps<T>) => {
         </table>
     );
 };
+
+const CryptoTable = React.memo(Table) as typeof Table;
 
 export default CryptoTable;

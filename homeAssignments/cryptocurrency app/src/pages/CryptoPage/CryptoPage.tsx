@@ -47,7 +47,7 @@ const CryptoPage = () => {
         setTrackedCurr((prev) =>
             prev.filter((currency) => currency !== row.currency)
         );
-    }, [queryClient]);
+    }, []);
 
     const columns = useMemo(
         () =>
@@ -74,7 +74,7 @@ const CryptoPage = () => {
 
                 <Button
                     variant='primary'
-                    className='update-all'
+                    id='update-all'
                     onClick={handleUpdateAll}
                 >
                     Update All

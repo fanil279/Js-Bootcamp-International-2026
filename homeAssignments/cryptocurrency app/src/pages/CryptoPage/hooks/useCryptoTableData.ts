@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, useDebugValue } from 'react';
 import { useCryptoPrices } from '../../../hooks/useCrypto';
 import type { CryptoRow, Trend, CryptoState } from '../../../types';
 
@@ -50,9 +50,9 @@ export const useCryptoTableData = (trackedCurr: string[]) => {
                     currency,
                     price: null,
                     trend: 'plateau',
-                    updateAllBtn: 'primary',
-                    updateBtn: 'secondary',
-                    deleteBtn: 'danger',
+                    updateAllBtn: 'updateAll',
+                    updateBtn: 'update',
+                    deleteBtn: 'delete',
                     status: 'loading',
                 };
             }
@@ -62,9 +62,9 @@ export const useCryptoTableData = (trackedCurr: string[]) => {
                     currency,
                     price: null,
                     trend: 'plateau',
-                    updateAllBtn: 'primary',
-                    updateBtn: 'secondary',
-                    deleteBtn: 'danger',
+                    updateAllBtn: 'updateAll',
+                    updateBtn: 'update',
+                    deleteBtn: 'delete',
                     status: 'error',
                     errorMessage:
                         query.error instanceof Error
@@ -77,9 +77,9 @@ export const useCryptoTableData = (trackedCurr: string[]) => {
                 currency,
                 price: query.data?.USD ?? null,
                 trend: trend[currency] ?? 'plateau',
-                updateAllBtn: 'primary',
-                updateBtn: 'secondary',
-                deleteBtn: 'danger',
+                updateAllBtn: 'updateAll',
+                updateBtn: 'update',
+                deleteBtn: 'delete',
                 status: 'success',
                 errorMessage: undefined,
             };
@@ -88,6 +88,12 @@ export const useCryptoTableData = (trackedCurr: string[]) => {
 
     const hasLoading = queryResults.some((query) => query.isPending);
     const hasError = queryResults.some((query) => query.isError);
+
+    useDebugValue({
+        trackedCount: trackedCurr.length,
+        hasLoading: hasLoading,
+        hasError: hasError,
+    });
 
     return {
         rows,
