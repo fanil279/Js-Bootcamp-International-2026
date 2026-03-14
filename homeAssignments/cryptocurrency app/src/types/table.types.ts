@@ -5,6 +5,7 @@ export type CryptoRow = {
     currency: string;
     price: number | null;
     trend: Trend;
+    updateAllBtn: ButtonVariant,
     updateBtn: ButtonVariant;
     deleteBtn: ButtonVariant;
     status: 'loading' | 'error' | 'success';

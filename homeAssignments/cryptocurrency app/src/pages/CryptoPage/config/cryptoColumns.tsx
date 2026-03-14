@@ -42,7 +42,7 @@ export const getCryptoColumns = ({
         cell: ({ row }) => (
             <div className='controls-cell'>
                 <Button
-                    variant='primary'
+                    variant='secondary'
                     onClick={() => handleUpdate(row.original)}
                 >
                     Update

@@ -2,6 +2,7 @@ import { useState, useMemo, useCallback } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useCryptoTableData } from './hooks/useCryptoTableData';
 import Preloader from '../../components/Preloader/Preloader';
+import Button from '../../components/Button';
 import Search from './components/Search';
 import Table from '../../shared/Table';
 import { getCryptoColumns } from './config/cryptoColumns';
@@ -28,6 +29,12 @@ const CryptoPage = () => {
 
         setSearchValue('');
     };
+
+    const handleUpdateAll = useCallback(() => {
+        queryClient.refetchQueries({
+            queryKey: ['crypto-price'],
+        });
+    }, [queryClient]);
 
     const handleUpdate = useCallback((row: CryptoRow) => {
         queryClient.refetchQueries({
@@ -62,8 +69,16 @@ const CryptoPage = () => {
                 handleSearch={handleSearch}
             />
             
-            <div className='crypto-list'>
+            <div className='crypto-container'>
                 <h1>Crypto Page</h1>
+
+                <Button
+                    variant='primary'
+                    className='update-all'
+                    onClick={handleUpdateAll}
+                >
+                    Update All
+                </Button>
 
                 <Table data={rows} columns={columns} className='crypto-table'/>
             </div>
