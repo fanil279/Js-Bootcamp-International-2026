@@ -1,0 +1,22 @@
+@use './variables' as *;
+
+body {
+	margin: 0;
+	font-family: Arial, sans-serif;
+	background-color: $bg-color;
+	color: $text-color;
+}
+
+#app {
+	padding: 30px;
+}
+
+h1 {
+	color: $primary-color;
+}
+
+img {
+	width: 220px;
+	display: block;
+	margin-top: 20px;
+}
