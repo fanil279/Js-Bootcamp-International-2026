@@ -1,0 +1,12 @@
+@media (max-width: 768px) {
+	.components-container {
+		flex-direction: column;
+		gap: 20px;
+		padding: 24px 16px;
+	}
+
+  	.components-container > div {
+		width: 100%;
+		max-width: 360px;
+	}
+}
