@@ -24,5 +24,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src", "utils/create-store.ts"]
+  "include": ["src", "src/utils/create-store.ts"]
 }

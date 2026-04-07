@@ -1,15 +1,8 @@
 import './App.css';
-import A from './components/A';
-import B from './components/B';
+import Counter from './counter/Counter';
 
 function App() {
-
-	return (
-		<div className='components-container'>
-			<A />
-			<B />
-		</div>
-	);
+	return <Counter />;
 }
 
 export default App;

@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { decrement, increment, store } from '../store/store';
+import store from '../../store/store';
+import { decrement, increment } from '../../store/actions';
 
-const A = () => {
+const B = () => {
     const [count, setCount] = useState<number>(store.getState());
     const [isSubscribed, setIsSubscribed] = useState<boolean>(true);
     
@@ -29,7 +30,7 @@ const A = () => {
 
     return (
         <div>
-            <h2 className='component-a'>Component A</h2>
+            <h2 className='component-b'>Component B</h2>
             <p className='count'>Count: {count}</p>
 
             <button className='increment' onClick={increment}>Increment</button>
@@ -46,4 +47,4 @@ const A = () => {
     );
 };
 
-export default A;
+export default B;

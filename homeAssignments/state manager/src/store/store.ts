@@ -1,25 +1,6 @@
-import { createStore } from '../../utils/create-store';
-import type { ACTION_TYPE } from '../../types';
+import { createStore } from '../utils/create-store';
+import { reducer } from './reducer';
 
-function reducer(state: number, action: ACTION_TYPE) {
-    switch (action.type) {
-        case 'INCREMENT':
-            return state + 1;
+const store = createStore(reducer, 0);
 
-        case 'DECREMENT':
-            return state - 1;
-
-        default:
-            return state;
-    }
-}
-
-export const store = createStore(reducer, 0);
-
-export function increment() {
-    store.dispatch({ type: 'INCREMENT' });
-}
-
-export function decrement() {
-    store.dispatch({ type: 'DECREMENT' });
-}
+export default store;
