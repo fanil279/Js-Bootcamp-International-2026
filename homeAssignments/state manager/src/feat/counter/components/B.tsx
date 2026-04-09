@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import store from '../../store/store';
-import { decrement, increment } from '../../store/actions';
+import store from '../../../store/store';
+import { decrement, increment } from '../../../store/actions';
 
 const B = () => {
     const [count, setCount] = useState<number>(store.getState());

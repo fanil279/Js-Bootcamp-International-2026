@@ -1,8 +1,14 @@
 import './App.css';
-import Counter from './counter/Counter';
+import Counter from './feat/counter/Counter';
+import Users from './feat/users/Users';
 
 function App() {
-	return <Counter />;
+	return (
+		<main className='app'>
+			<Counter />
+			<Users />
+		</main>
+	);
 }
 
 export default App;
