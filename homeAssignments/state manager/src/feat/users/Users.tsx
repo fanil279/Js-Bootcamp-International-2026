@@ -1,13 +1,25 @@
 import { useState, useEffect } from 'react';
+import store from '../../store/store';
+import { setUsers } from '../../store/actions';
 import UserList from './components/UserList';
 import User from '../../services/users';
 import type { User as UserType } from '../../types';
 
 function Users() {
-    const [users, setUsers] = useState<UserType[]>([]);
+    const [users, setUsersState] = useState<UserType[]>(store.getState().users);
 
     useEffect(() => {
-        User.getUsers().then(setUsers);
+        const unsubscribe = store.subscribe(() => {
+            setUsersState(store.getState().users);
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+    useEffect(() => {
+        User.getUsers().then((users) => {
+            setUsers(users);
+        });
     }, []);
 
     return (

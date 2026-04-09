@@ -6,7 +6,11 @@ class User {
 
     static async getUsers(): Promise<UserType[]> {
         try {
-            const response = await fetch(User.api, {
+            const params = new URLSearchParams({
+                fields: 'username,sex,address,name,email,birthday',
+            });
+
+            const response = await fetch(`${User.api}?${params.toString()}`, {
                 method: 'GET',
                 headers: {
                     'X-Api-Key': User.apiKey,

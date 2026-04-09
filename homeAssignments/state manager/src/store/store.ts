@@ -1,6 +1,12 @@
+import type { RootState } from '../types';
 import { createStore } from '../utils/create-store';
-import { reducer } from './reducer';
+import { rootReducer } from './reducer';
 
-const store = createStore(reducer, 0);
+const initialState: RootState = {
+    count: 0,
+    users: [],
+};
+
+const store = createStore(rootReducer, initialState);
 
 export default store;

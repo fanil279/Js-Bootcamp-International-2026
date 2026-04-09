@@ -10,3 +10,7 @@ export interface User {
 export type UserListProps = {
     users: User[];
 };
+
+export type UsersState = {
+    users: User[];
+};

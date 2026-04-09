@@ -1,11 +1,10 @@
-import A from './components/A';
-import B from './components/B';
+import CounterPanel from './components/CounterPanel';
 
 function Counter() {
 	return (
 		<div className='components-container'>
-			<A />
-			<B />
+			<CounterPanel title='Component A' titleClassName='component-a' />
+			<CounterPanel title='Component B' titleClassName='component-b' />
 		</div>
 	);
 }

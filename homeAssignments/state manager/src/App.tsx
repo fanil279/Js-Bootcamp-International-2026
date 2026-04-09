@@ -4,10 +4,15 @@ import Users from './feat/users/Users';
 
 function App() {
 	return (
-		<main className='app'>
-			<Counter />
-			<Users />
-		</main>
+		<>
+			<header className='header'>
+				<Counter />
+			</header>
+		
+			<main className='app'>
+				<Users />
+			</main>
+		</>
 	);
 }
 
