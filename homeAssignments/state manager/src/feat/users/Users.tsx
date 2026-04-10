@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import store from '../../store/store';
-import { setUsers } from '../../store/actions';
+import { setUsers,deleteUser } from '../../store/actions';
 import UserList from './components/UserList';
 import User from '../../services/users';
 import type { User as UserType } from '../../types';
@@ -21,6 +21,10 @@ function Users() {
             setUsers(users);
         });
     }, []);
+    
+    const handleDeleteUser = (user: UserType) => {
+        deleteUser(user);
+    };
 
     return (
         <div className='users-container'>
@@ -29,7 +33,7 @@ function Users() {
                 <p className='users-subtitle'>Fetched user profiles</p>
             </div>
 
-            <UserList users={users} />
+            <UserList users={users} handleDeleteUser={handleDeleteUser} />
         </div>
     );
 }

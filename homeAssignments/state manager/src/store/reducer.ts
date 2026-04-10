@@ -20,6 +20,12 @@ export function rootReducer(state: RootState, action: ACTION_TYPE): RootState {
                 users: action.payload,
             };
 
+        case 'DELETE_USER':
+            return {
+                ...state,
+                users: state.users.filter((user) => user.email !== action.payload),
+            };
+
         default:
             return state;
     }

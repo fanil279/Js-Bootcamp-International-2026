@@ -12,3 +12,7 @@ export function decrement() {
 export function setUsers(users: User[]) {
     store.dispatch({ type: 'SET_USERS', payload: users });
 }
+
+export function deleteUser(user: User) {
+    store.dispatch({ type: 'DELETE_USER', payload: user.email });
+}
