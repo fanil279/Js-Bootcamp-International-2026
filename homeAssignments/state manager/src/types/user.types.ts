@@ -10,6 +10,7 @@ export interface User {
 export type UserListProps = {
     users: User[];
     handleDeleteUser: (user: User) => void;
+    handleOpenDialog: (user: User) => void;
 };
 
 export type UsersState = {

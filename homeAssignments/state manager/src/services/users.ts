@@ -7,7 +7,7 @@ class User {
     static async getUsers(): Promise<UserType[]> {
         try {
             const params = new URLSearchParams({
-                fields: 'username,sex,address,name,email,birthday',
+                fields: 'username,sex,address,name,email,dob',
             });
 
             const response = await fetch(`${User.api}?${params.toString()}`, {
@@ -23,12 +23,26 @@ class User {
 
             const data = await response.json();
 
-            return data;
+            return data.map((user: {
+                username: string;
+                sex: string;
+                address: string;
+                name: string;
+                email: string;
+                dob: string;
+            }) => ({
+                username: user.username,
+                sex: user.sex,
+                address: user.address,
+                name: user.name,
+                email: user.email,
+                birthday: user.dob,
+            }));
         } catch (err) {
             console.error('Error fetching users:', err);
             throw err;
         }
-    }
+    };
 }
 
 export default User;

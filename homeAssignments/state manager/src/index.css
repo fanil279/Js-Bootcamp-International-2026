@@ -27,3 +27,22 @@
 		padding: 16px;
 	}
 }
+
+@media (max-width: 640px) {
+	.dialog {
+		padding: 18px 16px;
+		border-radius: 18px;
+	}
+
+	.dialog-title {
+		font-size: 1.25rem;
+	}
+
+	.dialog-actions {
+		flex-direction: column;
+	}
+
+	.dialog-btn {
+		width: 100%;
+	}
+}
