@@ -64,6 +64,7 @@ function Users() {
             />
 
             <Dialog
+                key={selectedUser?.email}
                 isOpen={Boolean(selectedUser)}
                 user={selectedUser}
                 onClose={handleDialogClose}

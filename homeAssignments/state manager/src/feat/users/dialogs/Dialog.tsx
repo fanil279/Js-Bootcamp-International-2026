@@ -1,15 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Button from '../../../components/Button';
 import type { DialogProps } from '../../../types';
 
 const Dialog = ({ isOpen, user, onClose, onSave }: DialogProps) => {
-    const [address, setAddress] = useState('');
-
-    useEffect(() => {
-        if (user) {
-            setAddress(user.address);
-        }
-    }, [user]);
+    const [address, setAddress] = useState(user?.address ?? '');
 
     if (!isOpen || !user) return null;
 
