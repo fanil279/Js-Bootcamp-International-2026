@@ -5,42 +5,53 @@ function UserList({
     users,
     handleDeleteUser,
     handleOpenDialog,
+    handleUserAdd,
 }: UserListProps) {
     return (
-        <ul className='users-list'>
-            {users.map((user) => (
-                <li
-                    key={user.email}
-                    className='user-row'
-                    onClick={() => handleOpenDialog(user)}
-                >
-                    <div className='user-cell'>
-                        <span className='user-label'>Username</span>
-                        <span className='user-value'>{user.username}</span>
-                    </div>
+        <>
+            <Button
+                variant='primary'
+                className='add-btn'
+                onClick={handleUserAdd}
+            >
+                Add User
+            </Button>
 
-                    <div className='user-cell'>
-                        <span className='user-label'>Address</span>
-                        <span className='user-value'>{user.address}</span>
-                    </div>
-
-                    <div className='user-cell'>
-                        <span className='user-label'>Email</span>
-                        <span className='user-value'>{user.email}</span>
-                    </div>
-
-                    <Button
-                        variant='danger'
-                        onClick={(e) => {
-                            e.stopPropagation();
-                            handleDeleteUser(user);
-                        }}
+            <ul className='users-list'>
+                {users.map((user) => (
+                    <li
+                        key={user.email}
+                        className='user-row'
+                        onClick={() => handleOpenDialog(user)}
                     >
-                        Delete
-                    </Button>
-                </li>
-            ))}
-        </ul>
+                        <div className='user-cell'>
+                            <span className='user-label'>Username</span>
+                            <span className='user-value'>{user.username}</span>
+                        </div>
+
+                        <div className='user-cell'>
+                            <span className='user-label'>Address</span>
+                            <span className='user-value'>{user.address}</span>
+                        </div>
+
+                        <div className='user-cell'>
+                            <span className='user-label'>Email</span>
+                            <span className='user-value'>{user.email}</span>
+                        </div>
+
+                        <Button
+                            variant='danger'
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                handleDeleteUser(user);
+                            }}
+                        >
+                            Delete
+                        </Button>
+                    </li>
+                ))}
+            </ul>
+        </>
     );
 }
 

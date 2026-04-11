@@ -256,6 +256,10 @@ body {
 	opacity: 0.8;
 }
 
+.add-btn {
+	margin-bottom: 1rem;
+}
+
 .dialog-overlay {
 	position: fixed;
 	inset: 0;

@@ -11,6 +11,7 @@ export type UserListProps = {
     users: User[];
     handleDeleteUser: (user: User) => void;
     handleOpenDialog: (user: User) => void;
+    handleUserAdd: () => void;
 };
 
 export type UsersState = {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import store from '../../store/store';
-import { setUsers, deleteUser } from '../../store/actions';
+import { setUsers, deleteUser, updateUserAddress, addUser } from '../../store/actions';
 import UserList from './components/UserList';
 import Dialog from './dialogs/Dialog';
 import User from '../../services/users';
@@ -37,9 +37,16 @@ function Users() {
     };
 
     const handleSaveUser = (email: string, address: string) => {
-        // Do later
-        console.log(email, address);
+        updateUserAddress(email, address);
         setSelectedUser(null);
+    };
+
+    const handleUserAdd = () => {
+        User.addUser().then((newUser) => {
+            if (newUser) {
+                addUser(newUser);
+            }
+        });
     };
 
     return (
@@ -53,6 +60,7 @@ function Users() {
                 users={users}
                 handleDeleteUser={handleDeleteUser}
                 handleOpenDialog={handleOpenDialog}
+                handleUserAdd={handleUserAdd}
             />
 
             <Dialog
