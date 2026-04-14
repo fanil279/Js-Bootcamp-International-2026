@@ -1,0 +1,48 @@
+@media (max-width: 768px) {
+	.components-container {
+		flex-direction: column;
+		gap: 20px;
+		padding: 24px 16px;
+	}
+
+	.components-container > div {
+		width: 100%;
+		max-width: 360px;
+	}
+}
+
+@media (max-width: 768px) {
+	.users-container {
+		padding: 20px 16px;
+		border-radius: 18px;
+	}
+
+	.users-title {
+		font-size: 1.6rem;
+	}
+
+	.user-row {
+		grid-template-columns: 1fr;
+		gap: 12px;
+		padding: 16px;
+	}
+}
+
+@media (max-width: 640px) {
+	.dialog {
+		padding: 18px 16px;
+		border-radius: 18px;
+	}
+
+	.dialog-title {
+		font-size: 1.25rem;
+	}
+
+	.dialog-actions {
+		flex-direction: column;
+	}
+
+	.dialog-btn {
+		width: 100%;
+	}
+}
